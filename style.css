@@ -741,21 +741,10 @@ footer {
     gap: 15px;
 }
 
-footer .footer-links {
-    display: flex;
-    gap: 25px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
 
-footer .footer-links a {
-    color: #fff;
-    font-weight: 500;
-}
 
-footer .footer-links a:hover {
-    color: var(--accent-color);
-}
+
+
 
 /* Animations - NEW & MODIFIED KEYFRAMES */
 @keyframes fadeInLeft {
@@ -828,16 +817,22 @@ footer .footer-links a:hover {
 }
 
 
-/* Responsive Design */
+/* ======================== */
+/* --- Responsive Design ---*/
+/* ======================== */
+
+/* --- Tablet and Smaller Screens (Up to 992px) --- */
 @media (max-width: 992px) {
-    .navbar nav ul {
-        display: none; /* Hide navigation for smaller screens */
+    .navbar .container {
+        /* CHANGED: Ensure logo and toggle stay on the same line for tablets too */
+        flex-direction: row; /* Now row instead of column */
+        justify-content: space-between; /* Space out logo and toggle */
+        align-items: center; /* Vertically center them */
+        gap: unset; /* Remove gap that was relevant for column layout */
     }
 
-    .navbar .container {
-        justify-content: center;
-        flex-direction: column;
-        gap: 15px;
+    .navbar nav ul {
+        display: none; /* Hide navigation for smaller screens */
     }
 
     .hero-content {
@@ -899,6 +894,7 @@ footer .footer-links a:hover {
     }
 }
 
+/* --- Mobile Phones (Up to 768px - Consolidated from previous duplicates) --- */
 @media (max-width: 768px) {
     h2 {
         font-size: 2em;
@@ -925,12 +921,17 @@ footer .footer-links a:hover {
     }
 
     .navbar .logo {
-        font-size: 1.5em;
+        font-size: 1.6em;
     }
+
     .hero-image img {
         width: 100%;
         max-width: 240px; /* Even smaller max-width for larger phones */
         border: 8px solid var(--card-bg); /* Adjust border for phone size */
+    }
+    .hero-section .hero-content {
+        flex-direction: column;
+        text-align: center;
     }
     /* Make the rectangle behind the photo larger on phones in dark mode */
     body.dark-mode .hero-image::before {
@@ -938,11 +939,34 @@ footer .footer-links a:hover {
         height: 100%;
         opacity: 0.2;
     }
+
+    /* Services Section adjustments */
+    .services-grid {
+        grid-template-columns: 1fr; /* Stack services vertically */
+    }
+
+    /* Projects Section adjustments */
+    .projects-grid {
+        grid-template-columns: 1fr; /* Stack projects vertically */
+    }
+
+    /* Contact Section adjustments */
+    .contact-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .contact-info, .contact-form {
+        width: 100%;
+    }
 }
 
+/* --- Very Small Mobile Phones (Up to 480px) --- */
 @media (max-width: 480px) {
     .navbar .container {
-        padding: 0 15px;
+        padding: 0 15px; /* Adjust padding for very small screens */
+    }
+    .navbar .logo {
+        font-size: 1.4em; /* Even smaller font for mobile phones */
     }
 
     .section-title {
