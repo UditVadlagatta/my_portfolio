@@ -1,658 +1,499 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Udit Bhoomesham Vadlagatta - Full Stack Java Developer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-/* Gallery Modal */
-.gallery-modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    padding-top: 40px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-/* Close Button */
-.gallery-modal .close {
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    color: #fff;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Gallery Content */
-.gallery-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.gallery-content img {
-    max-width: 80%;
-    max-height: 70vh;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #000;
-}
-
-/* Navigation Arrows */
-.gallery-prev,
-.gallery-next {
-    cursor: pointer;
-    background-color: rgba(255,255,255,0.3);
-    border: none;
-    padding: 15px;
-    font-size: 30px;
-    color: white;
-    border-radius: 50%;
-    transition: background-color 0.3s;
-}
-
-.gallery-prev:hover,
-.gallery-next:hover {
-    background-color: rgba(255,255,255,0.6);
-}
-
-/* Thumbnails */
-.thumbnails {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.thumbnails img {
-    width: 80px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s;
-    border: 2px solid transparent;
-}
-
-.thumbnails img:hover {
-    transform: scale(1.1);
-    border: 2px solid #fff;
-}
-
-
-
-
-        /* Gallery Overlay */
-.gallery-overlay {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-/* Gallery Image */
-.gallery-image {
-    max-width: 80%;
-    max-height: 70%;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
-    animation: fadeIn 0.4s ease;
-}
-
-/* Buttons */
-.prev-btn, .next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.3);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 24px;
-    transition: background-color 0.3s ease;
-}
-
-.prev-btn:hover, .next-btn:hover {
-    background-color: rgba(255, 255, 255, 0.6);
-}
-
-.prev-btn { left: 20px; }
-.next-btn { right: 20px; }
-
-/* Close Button */
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.close-btn:hover {
-    color: #ff3b3b;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-
-    </style>
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
     <header class="navbar">
-        <div class="container">
-            <h1 class="logo">Udit Vadlagatta</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="dark-mode-toggle">
-                <i class="fas fa-moon"></i>
-            </div>
+      <div class="container">
+        <h1 class="logo">Udit Vadlagatta</h1>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="dark-mode-toggle">
+          <i class="fas fa-moon"></i>
         </div>
+      </div>
     </header>
 
+    <!-- ==================== HERO ==================== -->
     <section id="home" class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <div class="text-content">
-                    <h2>Hello, I'm Udit Bhoomesham Vadlagatta</h2>
-                    <h3>Full Stack Java Developer | Web Developer</h3>
-                    <p>A passionate Full Stack Java Developer based in Mumbai, India, dedicated to crafting efficient and user-friendly web applications with a strong foundation in both front-end and back-end technologies.</p>
-                    <div class="cta-buttons">
-                        <a href="#projects" class="btn secondary-btn">View Portfolio</a>
-                        <a href="#contact" class="btn secondary-btn">Contact Me</a>
-                        <a href="file/Udit_Bhoomesham_Vadlagatta_Resume.pdf" download="Udit_Bhoomesham_Vadlagatta_Resume.pdf" class="btn secondary-btn">Download Resume</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="images/my-photo.jpg"  alt="Udit Bhoomesham Vadlagatta ">
-                </div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="text-content">
+            <h2>Hello, I'm Udit Bhoomesham Vadlagatta</h2>
+            <h3>Full Stack Java Developer | Web Developer</h3>
+            <p>
+              A passionate Full Stack Java Developer based in Mumbai, India,
+              dedicated to crafting efficient and user-friendly web applications
+              with a strong foundation in both front-end and back-end technologies.
+            </p>
+            <div class="cta-buttons">
+              <a href="#projects" class="btn secondary-btn">View Portfolio</a>
+              <a href="#contact" class="btn secondary-btn">Contact Me</a>
+              <a
+                href="file/Udit_Bhoomesham_Vadlagatta_Resume.pdf"
+                download="Udit_Bhoomesham_Vadlagatta_Resume.pdf"
+                class="btn secondary-btn"
+                >Download Resume</a
+              >
             </div>
+          </div>
+          <div class="hero-image">
+            <img src="images/my-photo.jpg" alt="Udit Bhoomesham Vadlagatta" />
+          </div>
         </div>
+      </div>
     </section>
 
+    <!-- ==================== ABOUT ==================== -->
     <section id="about" class="about-section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="bio-section">
-                    <h3>Personal Bio</h3>
-                    <p>I'm Udit Bhoomesham Vadlagatta, a passionate Full Stack Java Developer based in Mumbai, India. With a solid academic background and hands-on experience in building robust web applications, I take pride in delivering high-quality, scalable solutions. I enjoy working on both front-end design and back-end logic to create seamless and efficient user experiences.</p>
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="bio-section">
+            <h3>Personal Bio</h3>
+            <p>
+              I'm Udit Bhoomesham Vadlagatta, a passionate Full Stack Java
+              Developer based in Mumbai, India. With a solid academic background
+              and hands-on experience in building robust web applications, I
+              take pride in delivering high-quality, scalable solutions. I enjoy
+              working on both front-end design and back-end logic to create
+              seamless and efficient user experiences.
+            </p>
+            <p>
+              I'm a dedicated learner, detail-oriented, and I value strong
+              communication and team collaboration. I constantly strive to grow
+              my skills and contribute meaningfully to every project I take on.
+            </p>
+            <br />
+            <h3>Skills Known</h3>
+            <p>
+              HTML, CSS, JavaScript, React.js, Bootstrap, Core Java, Spring
+              Boot, Spring MVC, JDBC, MySQL, Git, GitHub, REST APIs
+            </p>
+          </div>
 
-<p>I'm a dedicated learner, detail-oriented, and I value strong communication and team collaboration. I constantly strive to grow my skills and contribute meaningfully to every project I take on.</p>
-                    
-                    <br>
-                    <h3>Skills Known</h3>
-                    <p>HTML, CSS, JavaScript, React.js, Bootstrap, Core Java, Spring Boot, Spring MVC, JDBC, MySQL, Git, GitHub, REST APIs</p>
-                </div>
-                <div class="education-section">
-                    <h3>Education</h3>
-                    <ul>
-                        <li><strong>B.E. in Electronics and Telecommunication Engineering</strong> Vasantdada Patil Pratisthan College of Engineering, Mumbai (2020 - 2024) <br> CGPA: 8.06/10</li>
-                        <li><strong>HSC</strong> Narayana Junior College, Telangana (2019) <br>Marks Obtained: 902/1000</li>
-                        <li><strong>SSC</strong> Cardinal Gracias High School, Mumbai (2017) <br>Percentage Obtained: 70.6%</li>
-                    </ul>
-                </div>
+          <div class="education-section">
+            <h3>Education</h3>
+            <ul>
+              <li>
+                <strong>B.E. in Electronics and Telecommunication Engineering</strong>
+                Vasantdada Patil Pratisthan College of Engineering, Mumbai (2020 - 2024)
+                <br />CGPA: 8.06/10
+              </li>
+              <li>
+                <strong>HSC</strong> Narayana Junior College, Telangana (2019)
+                <br />Marks Obtained: 902/1000
+              </li>
+              <li>
+                <strong>SSC</strong> Cardinal Gracias High School, Mumbai (2017)
+                <br />Percentage Obtained: 70.6%
+              </li>
+            </ul>
+          </div>
 
-
-                <!-- -----------------------------Internship-------------------------------------------- -->
-                <div class="internship-section">
-                    <h3>My Internships</h3>
-                    <ul>
-                        <li>
-                            <strong>&bull; IBM Skill Build</strong> - Frontend Developer Intern <br>
-                            <small>June 2023 - August 2023</small>
-                            <p>Worked on building a responsive e-commerce website using HTML, CSS, and JavaScript. Focused on creating clean UI components, improving responsiveness, and ensuring cross-device compatibility. Gained practical experience in front-end development, UI/UX implementation, and performance optimization.</p>
-                        </li>
-                        
-                        <li>
-                            <strong>&bull; Excelr Company</strong> - Full Stack Java Project <br>
-                            <small>June 2025 - August 2025</small>
-                            <p style="margin-bottom: 0;">I developed a Full-Stack Billing Application using React.js, Html , Css for the frontend; Java, Spring Boot for the backend, and MySQL as the database. The application provides a seamless and secure billing experience with the following key features:</p>
-                            
-                                <ul style="list-style-type: square; margin-left: 20px;">
-                                    <li style="margin: 0;padding: 0;">&#10148;  Secure Authentication & Authorization – Implements login/registration with role-based access control for Admin and Accountant.</li>
-                                    <li style="margin: 0;padding: 0;">&#10148; Customer & Product Management – Easily manage customer details and product inventories.</li>
-                                    <li style="margin: 0;padding: 0;">&#10148; Invoice Generation & Download – Create professional invoices and download them in PDF format.</li>
-                                    <li style="margin: 0;padding: 0;">&#10148; Reporting Dashboards – Interactive dashboards for both Admin and Accountant to monitor billing activities and financial insights.</li>
-                                    <li style="margin: 0;padding: 0;">&#10148; Admin Dashboard – Centralized control for managing users, products, and reports efficiently.</li>
-                                </ul>
-
-                        </li>
-                    </ul>
-                </div>
-            </div>
+          <div class="internship-section">
+            <h3>My Internships</h3>
+            <ul>
+              <li>
+                <strong>&bull; IBM Skill Build</strong> - Frontend Developer Intern <br />
+                <small>June 2023 - August 2023</small>
+                <p>
+                  Worked on building a responsive e-commerce website using HTML, CSS, and
+                  JavaScript. Focused on creating clean UI components, improving
+                  responsiveness, and ensuring cross-device compatibility. Gained practical
+                  experience in front-end development, UI/UX implementation, and performance
+                  optimization.
+                </p>
+              </li>
+              <li>
+                <strong>&bull; Excelr Company</strong> - Full Stack Java Project <br />
+                <small>June 2025 - August 2025</small>
+                <p style="margin-bottom: 0">
+                  I developed a Full-Stack Billing Application using React.js, Html, Css for
+                  the frontend; Java, Spring Boot for the backend, and MySQL as the database.
+                  The application provides a seamless and secure billing experience with the
+                  following key features:
+                </p>
+                <ul style="list-style-type: square; margin-left: 20px">
+                  <li style="margin: 0; padding: 0">
+                    &#10148; Secure Authentication &amp; Authorization – Implements
+                    login/registration with role-based access control for Admin and Accountant.
+                  </li>
+                  <li style="margin: 0; padding: 0">
+                    &#10148; Customer &amp; Product Management – Easily manage customer details
+                    and product inventories.
+                  </li>
+                  <li style="margin: 0; padding: 0">
+                    &#10148; Invoice Generation &amp; Download – Create professional invoices
+                    and download them in PDF format.
+                  </li>
+                  <li style="margin: 0; padding: 0">
+                    &#10148; Reporting Dashboards – Interactive dashboards for both Admin and
+                    Accountant to monitor billing activities and financial insights.
+                  </li>
+                  <li style="margin: 0; padding: 0">
+                    &#10148; Admin Dashboard – Centralized control for managing users, products,
+                    and reports efficiently.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </section>
 
+    <!-- ==================== SERVICES ==================== -->
     <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="section-title">My Services</h2>
-            <div class="services-grid">
-
-                <!-- Full Stack Java Development -->
-                <div class="service-card">
-                    <i class="fas fa-server"></i>
-                    <h3>Full Stack Java Development</h3>
-                    <p>Building scalable and robust back-end systems with Java, Spring Boot, and database integration.</p>
-                </div>
-
-                <!-- Front-End Development -->
-                <div class="service-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Front-End Development</h3>
-                    <p>Crafting responsive and interactive user interfaces using modern HTML, CSS, JavaScript and React.Js.</p>
-                </div>
-
-                <!-- Back-End Development -->
-                <div class="service-card">
-                    <i class="fa-solid fa-wrench"></i>
-                    <h3>Back-End Development</h3>
-                    Back-End Development
-<p>Building robust and scalable server-side applications using Java, Spring Boot,Spring MVC,JDBC and MySQL for seamless data management and API integration.</p>
-
-                    
-                </div>
-                
-                <div class="service-card">
-                    <i class="fas fa-cogs"></i>
-                    <h3>API Integration & Optimization</h3>
-                    <p>Developing and integrating efficient RESTful APIs to ensure seamless data flow and application performance.</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2 class="section-title">My Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <i class="fas fa-server"></i>
+            <h3>Full Stack Java Development</h3>
+            <p>Building scalable and robust back-end systems with Java, Spring Boot, and database integration.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-code"></i>
+            <h3>Front-End Development</h3>
+            <p>Crafting responsive and interactive user interfaces using modern HTML, CSS, JavaScript and React.Js.</p>
+          </div>
+          <div class="service-card">
+            <i class="fa-solid fa-wrench"></i>
+            <h3>Back-End Development</h3>
+            <p>Building robust and scalable server-side applications using Java, Spring Boot, Spring MVC, JDBC and MySQL for seamless data management and API integration.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-cogs"></i>
+            <h3>API Integration &amp; Optimization</h3>
+            <p>Developing and integrating efficient RESTful APIs to ensure seamless data flow and application performance.</p>
+          </div>
         </div>
+      </div>
     </section>
-<!-- --------------------------------------------Project-------------------------------------------------------------- -->
+
+    <!-- ==================== PROJECTS ==================== -->
     <section id="projects" class="projects-section">
-        <div class="container">
-            <h2 class="section-title">My Projects</h2>
-            <div class="projects-grid">
+      <div class="container">
+        <h2 class="section-title">My Projects</h2>
 
-
-                <!-- Image Gallery Modal -->
-<div id="imageGallery" class="gallery-modal">
-    <span class="close" onclick="closeGallery()">&times;</span>
-    <div class="gallery-content">
-        <button class="gallery-prev" onclick="prevImageGallery()">&#10094;</button>
-        <img id="gallery-img" src="" alt="Gallery Image">
-        <button class="gallery-next" onclick="nextImageGallery()">&#10095;</button>
-    </div>
-
-    <!-- Thumbnails -->
-    <div class="thumbnails" id="thumbnails"></div>
-</div>
-
-                <!-- Project: 1 -> Vanas – Herbal Website -->
-                <div class="project-card">
-                    <img src="pictures/vanas.png" alt="Vanas - Herbal Soap Website">
-                    <h3>Vanas – Herbal Care Website </h3>
-                    <p class="project-type">Personal Project (Duration : 3 months)</p>
-                    <p style="padding:0 0 10px 20px;margin: 0;">Frontend : Html, Css, React.js</p>
-                    
-
-                    <!-- Vanas - Herbal Care -->
-                    <p>A responsive website with a range of handcrafted herbal products for body, hair, skin, and personal care—made with natural ingredients like neem, tulsi, aloe vera, and turmeric to promote holistic wellness.</p>
-
-                    
-                    <div class="project-links">
-                        <a href="https://uditvadlagatta.github.io/Vanas/" target="_blank" class="btn small-btn">Live Demo</a>
-                        <a href="https://github.com/UditVadlagatta/Vanas" target="_blank" class="btn small-btn">GitHub Repo</a>
-                    </div>
-                </div>
-
-                <!-- Project: 2 -> Billing Application -->
-                <div class="project-card">
-                    
-                    <div class="slider">
-                        <img id="slider-img" src="pictures/Billing_Application/Admin/pic1.png" alt="Billing Application - Full Stack Java Project">
-                        <button class="prev" onclick="prevImage()">&#10094;</button>
-                        <button class="next" onclick="nextImage()">&#10095;</button>
-                    </div>
-                    <!-- <img src="pictures/vanas.png" alt="Billing Application - Full Stack Java Project"> -->
-
-
-                    <h3>Billing Application - Full Stack Java Project</h3>
-                    <p class="project-type">Excelr Internship (Duration : 3 months)</p>
-                    <p style="padding:0 0 0 20px;margin: 0;">Frontend : Html, Css, React.js</p>
-                    <p style="padding:0 0 0 20px;margin: 0;">Backend : Java, Springboot</p>
-                    <p style="padding:0 0 10px 20px;margin: 0;">Database : Mysql</p>
-
-                    <!-- Billing Application - Full Stack Java Project -->
-                    <p class="project-description" id="project-desc">I developed a Full-Stack Billing Application using React.js for the frontend, Spring Boot for the backend, and MySQL as the database. The application features secure authentication and authorization with role-based access for Admin and Accountant, allowing different levels of control. It includes customer and product management, invoice generation with PDF download, and reporting dashboards to provide clear insights for both Admin and Accountant. Additionally, an Admin Dashboard enables centralized control over users, products, and reports. This project demonstrates my ability to build scalable, secure, and user-friendly web applications by seamlessly integrating frontend, backend, and database technologies.</p>
-
-                    
-                    
-   
-
-                    <!-- Project Links -->
-                    <div class="project-links">
-
-                        <!-- See More / See Less Button -->
-                        <button class="see-more-btn  " id="see-more-btn" onclick="toggleDescription()">See More</button>
-
-                       <!-- View Pics Button -->
-                       <a href="#" class="btn small-btn" onclick="openGallery(event)">View Pic</a>    
-
-                        <!-- <a href="#" target="_blank" class="btn small-btn">Live Demo</a> -->
-                        <a href="https://github.com/UditVadlagatta/Billing_application" target="_blank" class="btn small-btn">GitHub Repo</a>
-                    </div>
-                </div>
-
-                
-
-
-                
-            </div>
+        <!-- Image Gallery Modal (for Billing App) -->
+        <div id="imageGallery" class="gallery-modal">
+          <span class="close" onclick="closeGallery()">&times;</span>
+          <div class="gallery-content">
+            <button class="gallery-prev" onclick="prevImageGallery()">&#10094;</button>
+            <img id="gallery-img" src="" alt="Gallery Image" />
+            <button class="gallery-next" onclick="nextImageGallery()">&#10095;</button>
+          </div>
+          <div class="thumbnails" id="thumbnails"></div>
         </div>
+
+        <div class="projects-grid">
+
+          <!-- ---- Project 1: Vanas ---- -->
+          <div class="project-card">
+            <img src="pictures/vanas.png" alt="Vanas - Herbal Soap Website" />
+            <h3>Vanas – Herbal Care Website</h3>
+            <p class="project-type">Personal Project (Duration : 3 months)</p>
+            <p style="padding: 0 0 10px 20px; margin: 0">Frontend : Html, Css, React.js</p>
+            <p>
+              A responsive website with a range of handcrafted herbal products for body, hair,
+              skin, and personal care—made with natural ingredients like neem, tulsi, aloe vera,
+              and turmeric to promote holistic wellness.
+            </p>
+            <div class="project-links">
+              <a href="https://uditvadlagatta.github.io/Vanas/" target="_blank" class="btn small-btn">Live Demo</a>
+              <a href="https://github.com/UditVadlagatta/Vanas" target="_blank" class="btn small-btn">GitHub Repo</a>
+            </div>
+          </div>
+
+          <!-- ---- Project 2: Billing Application ---- -->
+          <div class="project-card">
+            <div class="slider">
+              <img
+                id="slider-img"
+                src="pictures/Billing_Application/Admin/pic1.png"
+                alt="Billing Application - Full Stack Java Project"
+              />
+              <button class="prev" onclick="prevImage()">&#10094;</button>
+              <button class="next" onclick="nextImage()">&#10095;</button>
+            </div>
+            <h3>Billing Application - Full Stack Java Project</h3>
+            <p class="project-type">Excelr Internship (Duration : 3 months)</p>
+            <p style="padding: 0 0 0 20px; margin: 0">Frontend : Html, Css, React.js</p>
+            <p style="padding: 0 0 0 20px; margin: 0">Backend : Java, Springboot</p>
+            <p style="padding: 0 0 10px 20px; margin: 0">Database : Mysql</p>
+            <p class="project-description" id="billing-desc">
+              I developed a Full-Stack Billing Application using React.js for the frontend,
+              Spring Boot for the backend, and MySQL as the database. The application features
+              secure authentication and authorization with role-based access for Admin and
+              Accountant, allowing different levels of control. It includes customer and product
+              management, invoice generation with PDF download, and reporting dashboards to
+              provide clear insights for both Admin and Accountant. Additionally, an Admin
+              Dashboard enables centralized control over users, products, and reports. This
+              project demonstrates my ability to build scalable, secure, and user-friendly web
+              applications by seamlessly integrating frontend, backend, and database technologies.
+            </p>
+            <div class="project-links">
+              <button class="see-more-btn" id="billing-see-more-btn" onclick="toggleBillingDescription()">See More</button>
+              <a href="#" class="btn small-btn" onclick="openGallery(event)">View Pic</a>
+              <a href="https://github.com/UditVadlagatta/Billing_application" target="_blank" class="btn small-btn">GitHub Repo</a>
+            </div>
+          </div>
+
+          <!-- ---- Project 3: Cruise Management System ---- -->
+          <div class="project-card">
+            <img src="pictures/Cruise-Management-System/image.png" alt="Cruise Management System" />
+            <h3>Cruise Management System</h3>
+            <p class="project-type">Personal Project (Duration : 3 months)</p>
+            <p style="padding: 0 0 0px 20px; margin: 0">Frontend : React.js and Tailwind</p>
+            <p style="padding: 0 0 0px 20px; margin: 0">Backend : Node.js (Express.js), REST API</p>
+            <p style="padding: 0 0 10px 20px; margin: 0">Database : Mongodb Atlas</p>
+            <p class="project-description" id="cruise-desc">
+              Developed a responsive full-stack Cruise Management System with role-based access
+              for Admin, Employee, and Customer. Customers can browse cruises, book 1–5 seats
+              per day, track bookings and payments, generate invoices, and submit feedback with
+              real-time support replies. Employees manage operations via a dashboard featuring
+              live cruise occupancy tracking, customer handling, booking status monitoring, and
+              feedback resolution tools. Admins have complete system control with access to
+              revenue insights (total and pending), employee management, and full control over
+              cruises, bookings, and customer data—making it a comprehensive end-to-end cruise
+              operations platform.
+            </p>
+            <div class="project-links">
+              <button class="see-more-btn" id="cruise-see-more-btn" onclick="toggleCruiseDescription()">See More</button>
+              <a href="https://cruise-booking-app.vercel.app/" target="_blank" class="btn small-btn">Live Demo</a>
+              <div class="github-dropdown">
+                <button class="btn small-btn github-btn">GitHub ▾</button>
+                <div class="github-menu">
+                  <a href="https://github.com/UditVadlagatta/cruise-booking-app-frontend.git" target="_blank">Frontend</a>
+                  <a href="https://github.com/UditVadlagatta/cruise-booking-app-backend.git" target="_blank">Backend</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
+    <!-- ==================== CONTACT ==================== -->
     <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <p><i class="fas fa-envelope"></i> uditvadlagatta@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> +91 9392669201</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra, India</p>
-                    <div class="social-links">
-                        <a href="https://linkedin.com/in/udit-vadlagatta" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/UditVadlagatta" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.instagram.com/uditvadlagatta?igsh=MXVpcHd6NzY1NWVx" target="_blank"> 
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        
-                        
-                    </div>
-                </div>
-
-                <div class="contact-form">
-                    <form id="contactForm" action="https://formspree.io/f/mwpqqndg" method="POST">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                        <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
-                        <button type="submit" class="btn primary-btn">Send Message</button>
-                    </form>
-                    <div id="form-message" class="form-message"></div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> uditvadlagatta@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +91 9392669201</p>
+            <p><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra, India</p>
+            <div class="social-links">
+              <a href="https://linkedin.com/in/udit-vadlagatta" target="_blank"><i class="fab fa-linkedin"></i></a>
+              <a href="https://github.com/UditVadlagatta" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://www.instagram.com/uditvadlagatta?igsh=MXVpcHd6NzY1NWVx" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
             </div>
+          </div>
+          <div class="contact-form">
+            <form id="contactForm" action="https://formspree.io/f/mwpqqndg" method="POST">
+              <input type="text" name="name" placeholder="Your Name" required />
+              <input type="email" name="email" placeholder="Your Email" required />
+              <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+              <button type="submit" class="btn primary-btn">Send Message</button>
+            </form>
+            <div id="form-message" class="form-message"></div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <footer style="background-color: #2b4f69;">
-        <div class="container" >
-            <div class="footer-content">
-                <p>&copy; 2024 Udit Bhoomesham Vadlagatta. All rights reserved.</p>
-                
-            </div>
+    <footer style="background-color: #2b4f69">
+      <div class="container">
+        <div class="footer-content">
+          <p>&copy; 2024 Udit Bhoomesham Vadlagatta. All rights reserved.</p>
         </div>
+      </div>
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- Billing slider images -->
     <script>
-function toggleDescription() {
-    const desc = document.getElementById("project-desc");
-    const btn = document.getElementById("see-more-btn");
+      const images = [
+        "pictures/Billing_Application/Admin/pic1.png",
+        "pictures/Billing_Application/Admin/pic2.png",
+        "pictures/Billing_Application/Admin/pic3.png",
+        "pictures/Billing_Application/Admin/admin.png",
+        "pictures/Billing_Application/Admin/pic4.png",
+        "pictures/Billing_Application/Admin/pic5.png",
+        "pictures/Billing_Application/Admin/pic6.png",
+        "pictures/Billing_Application/Admin/pic7.png",
+        "pictures/Billing_Application/Admin/pic8.png",
+        "pictures/Billing_Application/Admin/pic9.png",
+        "pictures/Billing_Application/Admin/pic10.png",
+        "pictures/Billing_Application/Admin/pic11.png",
+        "pictures/Billing_Application/Admin/pic12.png",
+        "pictures/Billing_Application/Admin/pic13.png",
+        "pictures/Billing_Application/user/user.png",
+        "pictures/Billing_Application/user/user1.png",
+        "pictures/Billing_Application/user/user2.png",
+        "pictures/Billing_Application/user/user3.png",
+        "pictures/Billing_Application/user/user4.png",
+        "pictures/Billing_Application/user/user5.png",
+        "pictures/Billing_Application/backend/back.png",
+        "pictures/Billing_Application/backend/back1.png",
+        "pictures/Billing_Application/backend/back2.png",
+        "pictures/Billing_Application/backend/back3.png",
+        "pictures/Billing_Application/backend/back4.png",
+        "pictures/Billing_Application/backend/back5.png",
+        "pictures/Billing_Application/backend/back6.png",
+        "pictures/Billing_Application/backend/back7.png",
+        "pictures/Billing_Application/backend/back8.png",
+        "pictures/Billing_Application/mysql/mysql.png",
+        "pictures/Billing_Application/mysql/mysql1.png",
+        "pictures/Billing_Application/mysql/mysql2.png",
+        "pictures/Billing_Application/mysql/mysql3.png",
+        "pictures/Billing_Application/mysql/mysql4.png",
+        "pictures/Billing_Application/mysql/mysql5.png",
+        "pictures/Billing_Application/mysql/mysql6.png",
+      ];
 
-    desc.classList.toggle("expanded");
+      let sliderIndex = 0;
+      let autoSlide;
 
-    if (desc.classList.contains("expanded")) {
-        btn.textContent = "See Less";
-    } else {
-        btn.textContent = "See More";
-    }
-}
-</script>
-<!-- ---------------------------------------------------------------------- -->
-<script>
-const images = [
-// Admin
-        
-    "pictures/Billing_Application/Admin/pic1.png",
-    "pictures/Billing_Application/Admin/pic2.png",
-    "pictures/Billing_Application/Admin/pic3.png",
+      function showImage() {
+        const sliderImg = document.getElementById("slider-img");
+        sliderImg.style.opacity = 0;
+        setTimeout(() => {
+          sliderImg.src = images[sliderIndex];
+          sliderImg.style.opacity = 1;
+        }, 300);
+      }
 
-    "pictures/Billing_Application/Admin/admin.png",
-    "pictures/Billing_Application/Admin/pic4.png",
-    "pictures/Billing_Application/Admin/pic5.png",
-    "pictures/Billing_Application/Admin/pic6.png",
-    "pictures/Billing_Application/Admin/pic7.png",
-    "pictures/Billing_Application/Admin/pic8.png",
-    "pictures/Billing_Application/Admin/pic9.png",
-    "pictures/Billing_Application/Admin/pic10.png",
-    "pictures/Billing_Application/Admin/pic11.png",
-    "pictures/Billing_Application/Admin/pic12.png",
-    "pictures/Billing_Application/Admin/pic13.png",
+      function nextImage() {
+        sliderIndex = (sliderIndex + 1) % images.length;
+        showImage();
+      }
 
-    // user
+      function prevImage() {
+        sliderIndex = (sliderIndex - 1 + images.length) % images.length;
+        showImage();
+      }
 
-    "pictures/Billing_Application/user/user.png",
-    "pictures/Billing_Application/user/user1.png",
-    "pictures/Billing_Application/user/user2.png",
-    "pictures/Billing_Application/user/user3.png",
-    "pictures/Billing_Application/user/user4.png",
-    "pictures/Billing_Application/user/user5.png",
+      function startAutoSlide() {
+        autoSlide = setInterval(nextImage, 3000);
+      }
 
-    // Backend
+      document.querySelector(".slider").addEventListener("mouseenter", () => clearInterval(autoSlide));
+      document.querySelector(".slider").addEventListener("mouseleave", startAutoSlide);
 
-    "pictures/Billing_Application/backend/back.png",
-    "pictures/Billing_Application/backend/back1.png",
-    "pictures/Billing_Application/backend/back2.png",
-    "pictures/Billing_Application/backend/back3.png",
-    "pictures/Billing_Application/backend/back4.png",
-    "pictures/Billing_Application/backend/back5.png",
-    "pictures/Billing_Application/backend/back6.png",
-    "pictures/Billing_Application/backend/back7.png",
-    "pictures/Billing_Application/backend/back8.png",
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") nextImage();
+        if (e.key === "ArrowLeft") prevImage();
+      });
 
-    // Mysql
-    
-    "pictures/Billing_Application/mysql/mysql.png",
-    "pictures/Billing_Application/mysql/mysql1.png",
-    "pictures/Billing_Application/mysql/mysql2.png",
-    "pictures/Billing_Application/mysql/mysql3.png",
-    "pictures/Billing_Application/mysql/mysql4.png",
-    "pictures/Billing_Application/mysql/mysql5.png",
-    "pictures/Billing_Application/mysql/mysql6.png",
+      startAutoSlide();
+    </script>
 
-];
+    <!-- Gallery Modal (for Billing App View Pic) -->
+    <script>
+      const imagePictures = [
+        "pictures/Billing_Application/Admin/pic1.png",
+        "pictures/Billing_Application/Admin/pic2.png",
+        "pictures/Billing_Application/Admin/pic3.png",
+        "pictures/Billing_Application/Admin/admin.png",
+        "pictures/Billing_Application/Admin/pic4.png",
+        "pictures/Billing_Application/Admin/pic5.png",
+        "pictures/Billing_Application/Admin/pic6.png",
+        "pictures/Billing_Application/Admin/pic7.png",
+        "pictures/Billing_Application/Admin/pic8.png",
+        "pictures/Billing_Application/Admin/pic9.png",
+        "pictures/Billing_Application/Admin/pic10.png",
+        "pictures/Billing_Application/Admin/pic11.png",
+        "pictures/Billing_Application/Admin/pic12.png",
+        "pictures/Billing_Application/Admin/pic13.png",
+        "pictures/Billing_Application/user/user.png",
+        "pictures/Billing_Application/user/user1.png",
+        "pictures/Billing_Application/user/user2.png",
+        "pictures/Billing_Application/user/user3.png",
+        "pictures/Billing_Application/user/user4.png",
+        "pictures/Billing_Application/user/user5.png",
+        "pictures/Billing_Application/backend/back.png",
+        "pictures/Billing_Application/backend/back1.png",
+        "pictures/Billing_Application/backend/back2.png",
+        "pictures/Billing_Application/backend/back3.png",
+        "pictures/Billing_Application/backend/back4.png",
+        "pictures/Billing_Application/backend/back5.png",
+        "pictures/Billing_Application/backend/back6.png",
+        "pictures/Billing_Application/backend/back7.png",
+        "pictures/Billing_Application/backend/back8.png",
+        "pictures/Billing_Application/mysql/mysql.png",
+        "pictures/Billing_Application/mysql/mysql1.png",
+        "pictures/Billing_Application/mysql/mysql2.png",
+        "pictures/Billing_Application/mysql/mysql3.png",
+        "pictures/Billing_Application/mysql/mysql4.png",
+        "pictures/Billing_Application/mysql/mysql5.png",
+        "pictures/Billing_Application/mysql/mysql6.png",
+      ];
 
-let index = 0;
-let galleryIndex = 0;
-let autoSlide;
+      let galleryCurrentIndex = 0;
 
-/* ---------- Slider ---------- */
-function showImage() {
-    const sliderImg = document.getElementById("slider-img");
-    sliderImg.style.opacity = 0;
+      function openGallery(event) {
+        event.preventDefault();
+        galleryCurrentIndex = 0;
+        document.getElementById("gallery-img").src = imagePictures[galleryCurrentIndex];
+        document.getElementById("imageGallery").style.display = "flex";
+        generateThumbnails();
+      }
 
-    setTimeout(() => {
-        sliderImg.src = images[index];
-        sliderImg.style.opacity = 1;
-    }, 300);
+      function closeGallery() {
+        document.getElementById("imageGallery").style.display = "none";
+      }
 
-    updateDots();
-}
+      function nextImageGallery() {
+        galleryCurrentIndex = (galleryCurrentIndex + 1) % imagePictures.length;
+        document.getElementById("gallery-img").src = imagePictures[galleryCurrentIndex];
+      }
 
-function nextImage() {
-    index = (index + 1) % images.length;
-    showImage();
-}
+      function prevImageGallery() {
+        galleryCurrentIndex = (galleryCurrentIndex - 1 + imagePictures.length) % imagePictures.length;
+        document.getElementById("gallery-img").src = imagePictures[galleryCurrentIndex];
+      }
 
-function prevImage() {
-    index = (index - 1 + images.length) % images.length;
-    showImage();
-}
-
-function createDots() {
-    const dotsContainer = document.getElementById("dots");
-    dotsContainer.innerHTML = "";
-    for (let i = 0; i < images.length; i++) {
-        const dot = document.createElement("span");
-        dot.classList.add("dot");
-        dot.addEventListener("click", () => {
-            index = i;
-            showImage();
+      function generateThumbnails() {
+        const thumbnailsContainer = document.getElementById("thumbnails");
+        thumbnailsContainer.innerHTML = "";
+        imagePictures.forEach((imgSrc, i) => {
+          const thumb = document.createElement("img");
+          thumb.src = imgSrc;
+          thumb.alt = "Thumbnail " + (i + 1);
+          thumb.onclick = () => {
+            galleryCurrentIndex = i;
+            document.getElementById("gallery-img").src = imagePictures[galleryCurrentIndex];
+          };
+          thumbnailsContainer.appendChild(thumb);
         });
-        dotsContainer.appendChild(dot);
-    }
-    updateDots();
-}
+      }
+    </script>
 
-function updateDots() {
-    const dots = document.querySelectorAll(".dot");
-    dots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
-    });
-}
-
-function startAutoSlide() {
-    autoSlide = setInterval(nextImage, 3000);
-}
-
-document.querySelector(".slider").addEventListener("mouseenter", () => clearInterval(autoSlide));
-document.querySelector(".slider").addEventListener("mouseleave", startAutoSlide);
-
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") nextImage();
-    if (e.key === "ArrowLeft") prevImage();
-});
-
-
-</script>
-<script>
-    const imagePictures = [
-        // Admin
-        
-    "pictures/Billing_Application/Admin/pic1.png",
-    "pictures/Billing_Application/Admin/pic2.png",
-    "pictures/Billing_Application/Admin/pic3.png",
-
-    "pictures/Billing_Application/Admin/admin.png",
-    "pictures/Billing_Application/Admin/pic4.png",
-    "pictures/Billing_Application/Admin/pic5.png",
-    "pictures/Billing_Application/Admin/pic6.png",
-    "pictures/Billing_Application/Admin/pic7.png",
-    "pictures/Billing_Application/Admin/pic8.png",
-    "pictures/Billing_Application/Admin/pic9.png",
-    "pictures/Billing_Application/Admin/pic10.png",
-    "pictures/Billing_Application/Admin/pic11.png",
-    "pictures/Billing_Application/Admin/pic12.png",
-    "pictures/Billing_Application/Admin/pic13.png",
-
-    // user
-
-    "pictures/Billing_Application/user/user.png",
-    "pictures/Billing_Application/user/user1.png",
-    "pictures/Billing_Application/user/user2.png",
-    "pictures/Billing_Application/user/user3.png",
-    "pictures/Billing_Application/user/user4.png",
-    "pictures/Billing_Application/user/user5.png",
-
-    // Backend
-
-    "pictures/Billing_Application/backend/back.png",
-    "pictures/Billing_Application/backend/back1.png",
-    "pictures/Billing_Application/backend/back2.png",
-    "pictures/Billing_Application/backend/back3.png",
-    "pictures/Billing_Application/backend/back4.png",
-    "pictures/Billing_Application/backend/back5.png",
-    "pictures/Billing_Application/backend/back6.png",
-    "pictures/Billing_Application/backend/back7.png",
-    "pictures/Billing_Application/backend/back8.png",
-
-    // Mysql
-    
-    "pictures/Billing_Application/mysql/mysql.png",
-    "pictures/Billing_Application/mysql/mysql1.png",
-    "pictures/Billing_Application/mysql/mysql2.png",
-    "pictures/Billing_Application/mysql/mysql3.png",
-    "pictures/Billing_Application/mysql/mysql4.png",
-    "pictures/Billing_Application/mysql/mysql5.png",
-    "pictures/Billing_Application/mysql/mysql6.png",
-
-    
-
-];
-
-let currentIndex = 0;
-
-// Open Gallery
-function openGallery(event) {
-    event.preventDefault();
-    currentIndex = 0;
-    document.getElementById("gallery-img").src = imagePictures[currentIndex];
-    document.getElementById("imageGallery").style.display = "flex";
-    generateThumbnails();
-}
-
-// Close Gallery
-function closeGallery() {
-    document.getElementById("imageGallery").style.display = "none";
-}
-
-// Next Image
-function nextImageGallery() {
-    currentIndex = (currentIndex + 1) % imagePictures.length;
-    document.getElementById("gallery-img").src = imagePictures[currentIndex];
-}
-
-// Previous Image
-function prevImageGallery() {
-    currentIndex = (currentIndex - 1 + imagePictures.length) % imagePictures.length;
-    document.getElementById("gallery-img").src = imagePictures[currentIndex];
-}
-
-// Generate Thumbnails
-function generateThumbnails() {
-    const thumbnailsContainer = document.getElementById("thumbnails");
-    thumbnailsContainer.innerHTML = "";
-    imagePictures.forEach((imgSrc, index) => {
-        const thumb = document.createElement("img");
-        thumb.src = imgSrc;
-        thumb.alt = "Thumbnail " + (index + 1);
-        thumb.onclick = () => {
-            currentIndex = index;
-            document.getElementById("gallery-img").src = imagePictures[currentIndex];
-        };
-        thumbnailsContainer.appendChild(thumb);
-    });
-}
-
-</script>
-
-
-</body>
+  </body>
 </html>

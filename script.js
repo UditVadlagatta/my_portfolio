@@ -1,114 +1,125 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('nav ul li a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
 
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
+  /* =========================================
+     SMOOTH SCROLLING
+     ========================================= */
+  document.querySelectorAll("nav ul li a").forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) target.scrollIntoView({ behavior: "smooth" });
     });
+  });
 
-    // Dark Mode Toggle
-    const darkModeToggle = document.querySelector('.dark-mode-toggle');
-    const body = document.body;
+  /* =========================================
+     DARK MODE TOGGLE
+     ========================================= */
+  const darkModeToggle = document.querySelector(".dark-mode-toggle");
+  const body = document.body;
 
-    // Check for saved dark mode preference
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        body.classList.add('dark-mode');
-        darkModeToggle.querySelector('i').classList.remove('fa-moon');
-        darkModeToggle.querySelector('i').classList.add('fa-sun');
+  // Restore saved preference
+  if (localStorage.getItem("darkMode") === "enabled") {
+    body.classList.add("dark-mode");
+    darkModeToggle.querySelector("i").classList.replace("fa-moon", "fa-sun");
+  }
+
+  darkModeToggle.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    const icon = darkModeToggle.querySelector("i");
+    if (body.classList.contains("dark-mode")) {
+      icon.classList.replace("fa-moon", "fa-sun");
+      localStorage.setItem("darkMode", "enabled");
+      
+    } else {
+      icon.classList.replace("fa-sun", "fa-moon");
+      localStorage.setItem("darkMode", "disabled");
     }
+  });
 
-    darkModeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const icon = darkModeToggle.querySelector('i');
-        if (body.classList.contains('dark-mode')) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-            localStorage.setItem('darkMode', 'enabled');
-        } else {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-            localStorage.setItem('darkMode', 'disabled');
-        }
-    });
+  /* =========================================
+     CONTACT FORM SUBMISSION
+     ========================================= */
+  const contactForm = document.getElementById("contactForm");
+  const formMessage = document.getElementById("form-message");
 
-    // Contact Form Submission
-    const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('form-message');
+  contactForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-contactForm.addEventListener('submit', async function(e) { // Add 'async' keyword here
-    e.preventDefault(); // Prevent the default form submission (which would redirect)
-
-    const formData = new FormData(this); // Get all form data
-    const actionUrl = this.action; // Get the action URL from the form
+    const formData = new FormData(this);
+    const actionUrl = this.action;
 
     try {
-        const response = await fetch(actionUrl, {
-            method: 'POST',
-            body: formData, // Send the form data
-            headers: {
-                'Accept': 'application/json' // Important for Formspree to send JSON response
-            }
-        });
+      const response = await fetch(actionUrl, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
 
-        if (response.ok) { // Check if the submission was successful
-            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
-            formMessage.classList.remove('error');
-            formMessage.classList.add('success');
-            formMessage.style.display = 'block';
-
-            // Clear the form
-            contactForm.reset();
-
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                formMessage.style.display = 'none';
-            }, 5000);
-        } else {
-            // Handle errors (e.g., validation errors from Formspree)
-            const data = await response.json();
-            if (data.errors) {
-                formMessage.textContent = data.errors.map(error => error.message).join(', ');
-            } else {
-                formMessage.textContent = 'Oops! There was an error sending your message.';
-            }
-            formMessage.classList.remove('success');
-            formMessage.classList.add('error');
-            formMessage.style.display = 'block';
-        }
+      if (response.ok) {
+        formMessage.textContent = "Thank you for your message! I will get back to you soon.";
+        formMessage.classList.remove("error");
+        formMessage.classList.add("success");
+        formMessage.style.display = "block";
+        contactForm.reset();
+        setTimeout(() => { formMessage.style.display = "none"; }, 5000);
+      } else {
+        const data = await response.json();
+        formMessage.textContent = data.errors
+          ? data.errors.map((err) => err.message).join(", ")
+          : "Oops! There was an error sending your message.";
+        formMessage.classList.remove("success");
+        formMessage.classList.add("error");
+        formMessage.style.display = "block";
+      }
     } catch (error) {
-        console.error('Submission error:', error);
-        formMessage.textContent = 'Network error. Please try again later.';
-        formMessage.classList.remove('success');
-        formMessage.classList.add('error');
-        formMessage.style.display = 'block';
+      console.error("Submission error:", error);
+      formMessage.textContent = "Network error. Please try again later.";
+      formMessage.classList.remove("success");
+      formMessage.classList.add("error");
+      formMessage.style.display = "block";
     }
-});
+  });
 
-    // Scroll Reveal Animation (Basic example, can be enhanced with Intersection Observer)
-    const sections = document.querySelectorAll('section');
+  /* =========================================
+     SCROLL REVEAL
+     ========================================= */
+  const sections = document.querySelectorAll("section");
 
-    const revealSection = () => {
-        sections.forEach(section => {
-            const sectionTop = section.getBoundingClientRect().top;
-            const screenHeight = window.innerHeight;
+  sections.forEach((section) => section.classList.add("reveal"));
 
-            if (sectionTop < screenHeight - 100) { // Adjust 100 as needed
-                section.classList.add('active');
-            } else {
-                section.classList.remove('active'); // Optional: remove active if scrolled back up
-            }
-        });
-    };
-
-    // Add 'reveal' class to sections initially for the transition effect
-    sections.forEach(section => {
-        section.classList.add('reveal');
+  const revealSection = () => {
+    sections.forEach((section) => {
+      const sectionTop = section.getBoundingClientRect().top;
+      if (sectionTop < window.innerHeight - 100) {
+        section.classList.add("active");
+      } else {
+        section.classList.remove("active");
+      }
     });
+  };
 
-    window.addEventListener('scroll', revealSection);
-    revealSection(); // Initial check on load
+  window.addEventListener("scroll", revealSection);
+  revealSection();
 });
+
+/* =========================================
+   SEE MORE / SEE LESS — BILLING APP
+   (completely independent from Cruise)
+   ========================================= */
+function toggleBillingDescription() {
+  const desc = document.getElementById("billing-desc");
+  const btn  = document.getElementById("billing-see-more-btn");
+  desc.classList.toggle("expanded");
+  btn.textContent = desc.classList.contains("expanded") ? "See Less" : "See More";
+}
+
+/* =========================================
+   SEE MORE / SEE LESS — CRUISE MANAGEMENT
+   (completely independent from Billing)
+   ========================================= */
+function toggleCruiseDescription() {
+  const desc = document.getElementById("cruise-desc");
+  const btn  = document.getElementById("cruise-see-more-btn");
+  desc.classList.toggle("expanded");
+  btn.textContent = desc.classList.contains("expanded") ? "See Less" : "See More";
+}
