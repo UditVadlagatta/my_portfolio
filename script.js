@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const darkModeToggle = document.querySelector(".dark-mode-toggle");
   const body = document.body;
 
-  // Restore saved preference
   if (localStorage.getItem("darkMode") === "enabled") {
     body.classList.add("dark-mode");
     darkModeToggle.querySelector("i").classList.replace("fa-moon", "fa-sun");
@@ -29,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (body.classList.contains("dark-mode")) {
       icon.classList.replace("fa-moon", "fa-sun");
       localStorage.setItem("darkMode", "enabled");
-      
     } else {
       icon.classList.replace("fa-sun", "fa-moon");
       localStorage.setItem("darkMode", "disabled");
@@ -100,26 +98,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("scroll", revealSection);
   revealSection();
-});
 
-/* =========================================
-   SEE MORE / SEE LESS — BILLING APP
-   (completely independent from Cruise)
-   ========================================= */
-function toggleBillingDescription() {
-  const desc = document.getElementById("billing-desc");
-  const btn  = document.getElementById("billing-see-more-btn");
-  desc.classList.toggle("expanded");
-  btn.textContent = desc.classList.contains("expanded") ? "See Less" : "See More";
-}
+  /* =========================================
+     SEE MORE / SEE LESS — BILLING APP
+     ========================================= */
+  const billingBtn = document.getElementById("billing-see-more-btn");
+  const billingDesc = document.getElementById("billing-desc");
+  if (billingBtn && billingDesc) {
+    billingBtn.addEventListener("click", () => {
+      billingDesc.classList.toggle("expanded");
+      billingBtn.textContent = billingDesc.classList.contains("expanded") ? "See Less" : "See More";
+    });
+  }
 
-/* =========================================
-   SEE MORE / SEE LESS — CRUISE MANAGEMENT
-   (completely independent from Billing)
-   ========================================= */
-function toggleCruiseDescription() {
-  const desc = document.getElementById("cruise-desc");
-  const btn  = document.getElementById("cruise-see-more-btn");
-  desc.classList.toggle("expanded");
-  btn.textContent = desc.classList.contains("expanded") ? "See Less" : "See More";
-}
+  /* =========================================
+     SEE MORE / SEE LESS — CRUISE MANAGEMENT
+     ========================================= */
+  const cruiseBtn = document.getElementById("cruise-see-more-btn");
+  const cruiseDesc = document.getElementById("cruise-desc");
+  if (cruiseBtn && cruiseDesc) {
+    cruiseBtn.addEventListener("click", () => {
+      cruiseDesc.classList.toggle("expanded");
+      cruiseBtn.textContent = cruiseDesc.classList.contains("expanded") ? "See Less" : "See More";
+    });
+  }
+
+}); // end DOMContentLoaded
